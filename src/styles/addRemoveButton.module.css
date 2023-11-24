@@ -15,15 +15,25 @@
 }
 
 .add:hover {
-    background-color: rgba(0, 255, 0, 0.772);
+    background-color: rgb(0, 218, 0);
 }
 
 .remove {
     -webkit-mask: url('../svg/remove.svg') no-repeat center / contain;
     mask: url('../svg/remove.svg') no-repeat center / contain;
-    background-color: red;
+    background-color: rgb(0, 218, 0);
 }
 
 .remove:hover {
-    background-color: rgb(188, 0, 0);
+    background-color: rgba(0, 218, 0, 0.781);
+}
+
+.close {
+    -webkit-mask: url('../svg/close.svg') no-repeat center / contain;
+    mask: url('../svg/close.svg') no-repeat center / contain;
+    background-color: rgb(218, 0, 0);
+}
+
+.close:hover {
+    background-color: rgba(218, 0, 0, 0.781);
 }

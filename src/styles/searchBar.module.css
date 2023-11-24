@@ -15,6 +15,21 @@
     display: flex;
 }
 
+.buttons button {
+    background-color: midnightblue;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .5s;
+}
+
+.buttons button:hover {
+    filter:saturate(2);
+}
+
 .search > *, .buttons > * {
     margin: .5rem;
 }

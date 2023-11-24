@@ -19,11 +19,12 @@ function SelectionForm({ setShowForm }) {
             setPlaylistName(name);
             setPlaylistDescription(str);
             setShowForm(false);
+            document.body.style.overflow = '';
         }
     }, [name, description, setPlaylistName, setPlaylistDescription, setShowForm]);
 
     return (<div className={style.container}>
-        <div className={`${closeBtn.btn} ${closeBtn.remove} ${style.close}`} onClick={() => { setShowForm(false); document.body.style.overflow = ''; }} role="button"></div>
+        <div className={`${closeBtn.btn} ${closeBtn.close} ${style.close}`} onClick={() => { setShowForm(false); document.body.style.overflow = ''; }} role="button"></div>
         <div className={style.form}>
             {showWarning && <div className={style.warning}><div className={style.icon}></div>Newlines will be converted to spaces.</div>}
             <input onChange={(e) => { setName(e.target.value) }} placeholder="New Playlist Name" type="text" value={name} />
