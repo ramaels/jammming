@@ -1,0 +1,43 @@
+.left {
+    -webkit-mask: url('../svg/left_arrow.svg') no-repeat center / contain;
+    mask: url('../svg/left_arrow.svg') no-repeat center / contain;
+}
+
+.right {
+    -webkit-mask: url('../svg/left_arrow.svg') no-repeat center / contain;
+    mask: url('../svg/left_arrow.svg') no-repeat center / contain;
+    transform: rotate(180deg);
+}
+
+.down {
+    -webkit-mask: url('../svg/down_arrow.svg') no-repeat center / contain;
+    mask: url('../svg/down_arrow.svg') no-repeat center / contain;
+}
+
+.circle-down {
+    -webkit-mask: url('../svg/circle_down.svg') no-repeat center / contain;
+    mask: url('../svg/circle_down.svg') no-repeat center / contain;
+}
+
+.arrow{
+    display: inline-block;
+    transition: all;
+    transition-duration: .5s;
+    transform-origin: center;
+    background-color: currentColor;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.arrow * {
+    pointer-events: none;
+}
+
+.arrow.clicked {
+    transform: rotate(180deg);
+}
+
+.arrow:hover {
+    background-color: rgb(0, 188, 75);
+}

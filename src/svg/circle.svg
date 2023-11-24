@@ -1,0 +1,14 @@
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Draw the green part of the circle -->
+    <circle cx="12" cy="12" r="10" fill="green" />
+
+    <!-- Draw the red part of the circle -->
+    <circle cx="12" cy="12" r="10" fill="red" stroke="green" stroke-width="4"
+            stroke-dasharray="calc((100 - NUM) * 62.83 / 100) 62.83"
+            transform="rotate(-90 12 12)" />
+
+    <!-- Display the number in the middle of the circle -->
+    <text x="12" y="15" font-size="5" text-anchor="middle" fill="white">
+        NUM%
+    </text>
+</svg>

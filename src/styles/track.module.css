@@ -1,0 +1,25 @@
+.track {
+    display: flex;
+    margin: 1rem;
+}
+
+.track * {
+    margin: 0;
+}
+
+.track > img {
+    width: 4rem;
+    height: 4rem;
+}
+
+.track > section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.track figcaption {
+    flex-grow: 1;
+    font-size: .8rem;
+    padding: 0 1rem;
+}

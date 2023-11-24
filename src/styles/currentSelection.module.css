@@ -1,0 +1,27 @@
+.selection {
+    padding: 0 2rem;
+}
+
+.details {
+    padding: 1rem 0;
+}
+
+.details > div:first-of-type {
+    float: right;
+    margin-right: 1rem;
+}
+
+.edit {
+    -webkit-mask: url('../svg/edit.svg') no-repeat center / contain;
+    mask: url('../svg/edit.svg') no-repeat center / contain;
+    background-color: currentColor;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: inline-block;
+    transition: all .5s;
+}
+
+.edit:hover, .edit:active {
+    background-color: green;
+}

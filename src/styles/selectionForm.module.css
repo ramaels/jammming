@@ -1,0 +1,73 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.871);
+    color: white;
+    display: flex;
+}
+
+.close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.form {
+    margin: auto;
+    min-width: 300px;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: black;
+}
+
+.container input, .container textarea {
+    display: block;
+    margin: auto;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+/* .container textarea {
+    height: 35vh;
+} */
+
+.form button {
+    background-color: midnightblue;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .5s;
+}
+
+.form button:hover {
+    filter:saturate(2);
+}
+
+.warning {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    background-color: midnightblue;
+    border-radius: 10px;
+    padding: 0.25rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.warning .icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: inline-block;
+    transition: all .5s;
+    margin-right: 1rem !important;
+    -webkit-mask: url('../svg/warning.svg') no-repeat center / contain;
+    mask: url('../svg/warning.svg') no-repeat center / contain;
+    background-color: currentColor;
+}

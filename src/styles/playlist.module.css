@@ -1,0 +1,40 @@
+.playlist {
+    display: flex;
+}
+
+.playlist * {
+    margin: 0;
+}
+
+.playlist > img {
+    height: 3rem;
+    width: 3rem;
+    object-fit: cover;
+}
+
+.playlist > div:first-of-type {
+    flex-grow: 1;
+    width: calc(100% - 72px);
+}
+
+.playlist > div > h5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit {
+    -webkit-mask: url('../svg/edit.svg') no-repeat center / contain;
+    mask: url('../svg/edit.svg') no-repeat center / contain;
+    background-color: currentColor;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: inline-block;
+    transition: all .5s;
+    margin-left: 1rem !important;
+}
+
+.edit:hover, .edit:active {
+    background-color: green;
+}

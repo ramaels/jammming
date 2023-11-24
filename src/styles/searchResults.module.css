@@ -1,0 +1,54 @@
+.tracks {
+    padding: 0 2rem;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title h2 {
+    z-index: 10;
+}
+
+.arrow{
+    display: inline-block;
+    transition: all;
+    transition-duration: .5s;
+    transform-origin: center;
+    cursor: pointer;
+    height: 24px;
+}
+
+.arrow * {
+    pointer-events: none;
+}
+
+.arrow.clicked {
+    transform: rotate(180deg);
+}
+
+.list {
+    --height: 0;
+    transition: all;
+    transition-duration: .5s;
+    height: 0;
+    overflow: hidden;
+}
+
+.list > div > div {
+    max-height: 35vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.list div.track-results {
+    max-height: 27vh;
+}
+
+.list-down {
+    height: 35vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

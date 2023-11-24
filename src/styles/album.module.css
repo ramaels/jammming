@@ -1,0 +1,50 @@
+.section {
+    display: flex;
+    margin: .5rem 0;
+}
+
+.section * {
+    margin: 0;
+}
+
+.section article {
+    width: calc(100% - 90px);
+}
+
+.section article > div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section article > div:first-of-type > h5 {
+    margin: 0 1rem;
+}
+
+.tracks {
+    width: max-content;
+    /* animation: scroll 7s infinite; */
+}
+
+.tracks-container {
+    display: flex;
+}
+
+.left-arrow, .right-arrow {
+    cursor: pointer;
+}
+
+.right-arrow {
+    transform: rotate(180deg);
+}
+
+.tracks-screen {
+    width: calc(100% - 48px);
+    overflow-x: hidden;
+}
+
+/* @keyframes scroll {
+    to {
+        transform: translateX(-100%);
+    }   
+} */

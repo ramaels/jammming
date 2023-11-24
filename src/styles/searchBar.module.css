@@ -1,0 +1,49 @@
+.search {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 45rem;
+    margin: auto;
+}
+
+.search > * {
+    height: max-content;
+}
+
+.buttons {
+    display: flex;
+}
+
+.search > *, .buttons > * {
+    margin: .5rem;
+}
+
+.filters-btn * {
+    pointer-events: none;
+}
+
+.filters-container {
+    --height: 0;
+    overflow: hidden;
+    transition: all;
+    transition-duration: .5s;
+    height: var(--height);
+
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filters > * {
+    margin: .5rem;
+    display: inline-block;
+    width: max-content;
+}
+
+.filters-down {
+    height: var(--height);
+}
