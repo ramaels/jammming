@@ -9,7 +9,6 @@ function Pagination({data = null, update = null}) {
     const nestedObject = data ? data : Object.values(searchResult)[0];
     const nextUrl = nestedObject.next;
     const previousUrl = nestedObject.previous;
-    const total = nestedObject.total;
 
     const handleNext = useCallback(() => {
         if (nextUrl) {

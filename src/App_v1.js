@@ -24,71 +24,147 @@ function App() {
   const [playlistName, setPlaylistName] = useState('New Playlist Name');
   const [playlistDescription, setPlaylistDescription] = useState('Enter a description...');
 
-  const fetchFromSpotify = useCallback(async (url, method = 'GET', body = null) => {
-    const payload = {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token.access_token}`
-      },
-      body: body ? JSON.stringify(body) : null
-    };
-
-    const { data, token: updatedToken } = await auth.fetchWithRetry(url, token, payload);
-    if (updatedToken && updatedToken.access_token !== token.access_token) {
-      setToken(updatedToken);
-    }
-    return data;
-  }, [token]);
-
   const getToken = useCallback((code) => {
     return auth.getToken(code);
   }, []);
 
-  const search = useCallback((query, type) => {
+  const search = useCallback((query, type, token) => {
     const url = `https://api.spotify.com/v1/search?q=${query}${type !== '' ? '&type=' + type : ''}`;
-    return fetchFromSpotify(url).then(setSearchResult);
-  }, [fetchFromSpotify]);
+    const payload = {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    }
+    return auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+      if (updatedToken && updatedToken.access_token !== token.access_token) { // Update the token state if it's new
+        setToken(updatedToken);
+        console.log("Token state updated:", updatedToken);
+      }
+      return data;
+    }).then(setSearchResult);
+  }, []);
 
-  const getResults = useCallback((url) => {
-    return fetchFromSpotify(url).then(setSearchResult);
-  }, [fetchFromSpotify]);
+  const getResults = useCallback((url, token) => {
+    const payload = {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    }
+    return auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+      if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+        setToken(updatedToken);
+      }
+      return data;
+    }).then(setSearchResult);
+  }, []);
 
-  const getSubResults = useCallback((url) => {
-    return fetchFromSpotify(url);
-  }, [fetchFromSpotify]);
+  const getSubResults = useCallback((url, token) => {
+    const payload = {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    }
+    return auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+      if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+        setToken(updatedToken);
+      }
+      return data;
+    });
+  }, []);
 
-  const getUserProfile = useCallback(() => {
+  const getUserProfile = useCallback((token) => {
     const url = 'https://api.spotify.com/v1/me';
-    return fetchFromSpotify(url).then(setUserProfile).then(() => { localStorage.removeItem('profile_state'); });
-  }, [fetchFromSpotify]);
+    const payload = {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    };
+    return auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+      if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+        setToken(updatedToken);
+      }
+      return data;
+    }).then(setUserProfile).then(() => { localStorage.removeItem('profile_state'); });
+  }, []);
 
-  const getGenres = useCallback(() => {
+  const getGenres = useCallback((token) => {
     const url = "https://api.spotify.com/v1/recommendations/available-genre-seeds";
-    return fetchFromSpotify(url).then(data => data.genres);
-  }, [fetchFromSpotify]);
+    const payload = {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    }
 
-  const getPlaylists = useCallback((user_id) => {
+    return auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+      if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+        setToken(updatedToken);
+      }
+      return data;
+    }).then(data => data.genres);
+  }, []);
+
+  const getPlaylists = useCallback((token, user_id) => {
     const url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
-    return fetchFromSpotify(url).then(setPlaylists);
-  }, [fetchFromSpotify]);
+    const payload = {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    }
+    return auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+      if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+        setToken(updatedToken);
+      }
+      return data;
+    }).then(setPlaylists);
+  }, []);
 
-  const getAlbumTracks = useCallback((item) => {
+  const getAlbumTracks = useCallback((item, token) => {
     const url = item.href;
-    return fetchFromSpotify(url);
-  }, [fetchFromSpotify]);
+    const payload = {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    }
+    return auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+      if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+        setToken(updatedToken);
+      }
+      return data;
+    });
+  }, []);
 
-  const getPlaylistTracks = useCallback((playlist) => {
+  const getPlaylistTracks = useCallback((playlist, token) => {
     const url = `https://api.spotify.com/v1/playlists/${playlist.id}/tracks?limit=20`
-    return fetchFromSpotify(url);
-  }, [fetchFromSpotify]);
+    const payload = {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    }
+    return auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+      if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+        setToken(updatedToken);
+      }
+      return data;
+    });
+    // return fetch(url, payload).then(body => body.json(), () => null);
+  }, []);
 
-  const getTopTracks = useCallback(async (artist, userProfile) => {
+  const getTopTracks = useCallback(async (token, artist, userProfile) => {
     const url = `https://api.spotify.com/v1/artists/${artist.id}/top-tracks?market=${userProfile.country}`;
-    return fetchFromSpotify(url);
-  }, [fetchFromSpotify]);
+    const payload = {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    };
+    return auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+      if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+        setToken(updatedToken);
+      }
+      return data;
+    });
+  }, []);
 
-  const savePlaylist = useCallback(async () => {
+  const savePlaylist = useCallback(async (token) => {
     const exists = playlists.items.some(playlist => playlist.id === currentPlaylist.id);
     console.log(exists);
     if (exists) {
@@ -100,39 +176,93 @@ function App() {
 
       if (newTracks.length > 0) {
         const urisArr = newTracks.map(item => item.uri);
-        const body = {
-          uris: urisArr,
-          position: 0
+        const payload = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token.access_token}`
+          },
+          body: JSON.stringify({
+            uris: urisArr,
+            position: 0
+          })
         };
-        fetchFromSpotify(url,'POST',body).then(()=>{getPlaylists(userProfile.id);});
+        console.log((payload));
+        auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+          if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+            setToken(updatedToken);
+          }
+          // return data;
+        });
+        getPlaylists(token, userProfile.id);
       }
       if (tracksToRemove.length > 0) {
         const urisArr = tracksToRemove.map(item => ({ uri: item.uri }));
-        const body = {
-          tracks: urisArr,
-          snapshot_id: currentPlaylist.snapshot_id
+        const payload = {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token.access_token}`
+          },
+          body: JSON.stringify({
+            tracks: urisArr,
+            snapshot_id: currentPlaylist.snapshot_id
+          })
         };
-        fetchFromSpotify(url,'DELETE',body).then(()=>{getPlaylists(userProfile.id);});
+        console.log((payload));
+        auth.fetchWithRetry(url, token, payload).then(({ data, token: updatedToken }) => {
+          if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+            setToken(updatedToken);
+          }
+          // return data;
+        })
+        getPlaylists(token, userProfile.id);
       }
     } else {
       const url1 = `https://api.spotify.com/v1/users/${userProfile.id}/playlists`;
-      const body1 = {
-        name: playlistName,
-        description: playlistDescription,
-        public: false
+      const payload1 = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token.access_token}`
+        },
+        body: JSON.stringify({
+          name: playlistName,
+          description: playlistDescription,
+          public: false
+        })
       };
-      const playlistCreated = await fetchFromSpotify(url1,'POST',body1);
+      const playlistCreated = await auth.fetchWithRetry(url1, token, payload1).then(({ data, token: updatedToken }) => {
+        if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+          setToken(updatedToken);
+        }
+        return data;
+      });
 
       const urisArr = currentPlaylist.tracks.map(item => item.uri);
       const url2 = await `https://api.spotify.com/v1/playlists/${playlistCreated.id}/tracks`;
-      const body2 = {
-        uris: urisArr,
-        position: 0
+      const payload2 = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token.access_token}`
+        },
+        body: JSON.stringify({
+          uris: urisArr,
+          position: 0
+        })
       };
-      await fetchFromSpotify(url2,'POST',body2);
-      await getPlaylists(userProfile.id);
+      console.log((payload1, payload2));
+      
+      await auth.fetchWithRetry(url2, token, payload2).then(({ data, token: updatedToken }) => {
+        if (updatedToken && updatedToken !== token) { // Update the token state if it's new
+          setToken(updatedToken);
+        }
+        // return data;
+      });
+      await getPlaylists(token, userProfile.id);
     }
-  }, [playlists, currentPlaylist, userProfile, getPlaylists, playlistName, playlistDescription,fetchFromSpotify]);
+  }, [playlists, currentPlaylist, userProfile, getPlaylists, playlistName, playlistDescription]);
 
   const addPlaylistId = useCallback((id, data, snapshot_id) => {
     setCurrentPlaylist(pre => ({
@@ -214,7 +344,7 @@ function App() {
       } else if (userProfile && !playlists) {
         if (!localStorage.getItem('playlists_state')) {
           localStorage.setItem('playlists_state', 'true');
-          getPlaylists(userProfile.id).then(() => { localStorage.removeItem('playlists_state') });
+          getPlaylists(token, userProfile.id).then(() => { localStorage.removeItem('playlists_state') });
         }
       }
       if (genres.length === 0) {

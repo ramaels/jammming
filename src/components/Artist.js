@@ -6,7 +6,6 @@ import style from "../styles/artist.module.css";
 import searchResults from "../styles/searchResults.module.css";
 
 import Track from "./Track";
-import Pagination from "./Pagination";
 
 function Artist({ artist }) {
     const bg = useRef(null);
@@ -22,7 +21,7 @@ function Artist({ artist }) {
     useEffect(() => {
         if (!topTracks && localStorage.getItem(`toptrack_${artist.id}_State`)!=='true') {
             localStorage.setItem(`toptrack_${artist.id}_State`, 'true');
-            getTopTracks(token, artist, userProfile).then(setTopTracks).then(() => { localStorage.removeItem(`toptrack_${artist.id}_State`) });
+            getTopTracks( artist, userProfile).then(setTopTracks).then(() => { localStorage.removeItem(`toptrack_${artist.id}_State`) });
         }
         topVar();
         window.addEventListener('resize', topVar);
