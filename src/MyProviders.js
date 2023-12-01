@@ -1,7 +1,9 @@
 import CurrentUserContext from "./UserContext";
+import ThemeContext from "./ThemeContext";
 
-function MyProviders({ children, token, search,genres, getGenres,searchResult,playlists,userProfile, currentPlaylist, addItems, removeItems, playlistName, setPlaylistName, playlistDescription, setPlaylistDescription, getAlbumTracks, getPlaylistTracks, getTopTracks, getResults, getSubResults, addPlaylistId, savePlaylist }) {
+function MyProviders({ children,theme, setTheme, token, search,genres, getGenres,searchResult,playlists,userProfile, currentPlaylist, addItems, removeItems, playlistName, setPlaylistName, playlistDescription, setPlaylistDescription, getAlbumTracks, getPlaylistTracks, getTopTracks, getResults, getSubResults, addPlaylistId, savePlaylist }) {
     return (
+        <ThemeContext.Provider value={{theme, setTheme}} >
             <CurrentUserContext.Provider
                 value={{
                     token,
@@ -29,6 +31,7 @@ function MyProviders({ children, token, search,genres, getGenres,searchResult,pl
             >
                 {children}
             </CurrentUserContext.Provider>
+        </ThemeContext.Provider>
     );
 }
 

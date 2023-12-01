@@ -1,7 +1,6 @@
 import { useState, useContext, useCallback } from "react";
 import CurrentUserContext from "../UserContext";
-import style from "../styles/playlist.module.css";
-import remove from "../styles/addRemoveButton.module.css";
+import buttonStyles from "../styles/button.module.css";
 
 function EditRemove({ playlist, playlistTracks }) {
     const [selected, setSelected] = useState(false);
@@ -25,8 +24,8 @@ function EditRemove({ playlist, playlistTracks }) {
 
     return (
         <>
-            {!selected ? <div className={style.edit} onClick={editPlaylist} role="button"></div> :
-            <div className={`${remove.remove} ${remove.btn}`} onClick={removePlaylist} role="button"></div>}
+            {!selected ? <div className={`${buttonStyles.edit} ${buttonStyles.btn}`} onClick={editPlaylist} role="button"></div> :
+            <div className={`${buttonStyles.remove} ${buttonStyles.btn}`} onClick={removePlaylist} role="button"></div>}
         </>
     )
 }

@@ -1,18 +1,30 @@
 .tracks {
     padding: 0 2rem;
+    background-color: var(--background-color);
+    color: var(--color);
+    border: 3px var(--border-color) solid;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 700px) {
+    .tracks {
+        padding: 0 1rem;
+    }
 }
 
 .title {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 1rem 0;
 }
 
 .title h2 {
     z-index: 10;
+    margin: 0;
 }
 
-.arrow{
+.arrow {
     display: inline-block;
     transition: all;
     transition-duration: .5s;
@@ -37,10 +49,24 @@
     overflow: hidden;
 }
 
-.list > div > div {
-    max-height: 35vh;
-    overflow-y: auto;
+.list>div {
+    padding: 1rem;
+    background-color: var(--background-color1);
+    border-radius: 10px;
+}
+
+.tracks .list>div {
+    padding-right: 0;
+}
+
+.list>div>div {
+    max-height: 50vh;
     overflow-x: hidden;
+    border-radius: 10px;
+}
+
+.tracks>.list>div>div:last-of-type {
+    margin-top: 1rem;
 }
 
 .list div.track-results {
@@ -48,7 +74,30 @@
 }
 
 .list-down {
-    height: 35vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+    padding-bottom: 1rem;
+}
+
+.list .list {
+    border: 3px var(--border-color) solid;
+    border-radius: 10px;
+    margin-right: 1rem;
+}
+
+.list .list>div {
+    padding: 0;
+    padding-top: 1rem;
+}
+
+.list>div>div>.list>div>div {
+    margin: 0;
+}
+
+.list>div>div>.list>div>div:last-of-type {
+    margin: 0 1rem;
+    margin-top: 1rem;
+}
+
+.list .artists {
+    max-height: 50vh;
+    border-radius: 10px;
 }

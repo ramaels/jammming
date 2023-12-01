@@ -1,3 +1,15 @@
+.container {
+    background-color: var(--background-color);
+    color: var(--color);
+    border: 3px var(--border-color) solid;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.search>* {
+    height: max-content;
+}
+
 .search {
     display: flex;
     justify-content: space-around;
@@ -5,37 +17,17 @@
     align-items: center;
     max-width: 45rem;
     margin: auto;
+    gap: 1rem;
 }
 
-.search > * {
-    height: max-content;
+.search > select {
+    margin-left: 1rem;
 }
 
 .buttons {
     display: flex;
-}
-
-.buttons button {
-    background-color: midnightblue;
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: white;
-    padding: 0.25rem 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all .5s;
-}
-
-.buttons button:hover {
-    filter:saturate(2);
-}
-
-.search > *, .buttons > * {
-    margin: .5rem;
-}
-
-.filters-btn * {
-    pointer-events: none;
+    justify-content: space-between;
+    width: 8rem;
 }
 
 .filters-container {
@@ -44,7 +36,6 @@
     transition: all;
     transition-duration: .5s;
     height: var(--height);
-
 }
 
 .filters {
@@ -53,10 +44,14 @@
     justify-content: center;
 }
 
-.filters > * {
+.filters>* {
     margin: .5rem;
     display: inline-block;
     width: max-content;
+}
+
+.filters input {
+    margin-left: .5rem;
 }
 
 .filters-down {

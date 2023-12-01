@@ -7,10 +7,13 @@ import AddRemoveButton from "./AddRemoveButton";
 import Arrow from "./Arrow";
 import Track from "./Track";
 import Pagination from "./Pagination";
+import themeStyle from "../styles/theme.module.css";
+import ThemeContext from "../ThemeContext";
 
 function Album({ item }) {
     const [albumTracks, setAlbumTracks] = useState(null);
     const { token, getAlbumTracks } = useContext(CurrentUserContext);
+    const { theme } = useContext(ThemeContext);
 
     useEffect(() => {
         if (!albumTracks && localStorage.getItem(`albumTracks_${item.id}_state`) !== 'true') {
@@ -36,18 +39,18 @@ function Album({ item }) {
     }, [getAlbumTracks, item, token, albumTracks]);
     return (
         <>
-            <section className={style.section}>
-                <img title={item.name} src={item.images[2].url} width={item.images[2].width} height={item.images[2].height} alt={'album ' + item.name} />
-                <article>
-                    <div>
-                        <h5>
-                            {item.name}
-                        </h5>
-                        {albumTracks && <AddRemoveButton item={albumTracks.tracks.items} playlistTrack={false} />}
-                    </div>
-                    <p>{item.album_type}(<em>release date: {item.release_date}</em>) featuring {item.total_tracks} tracks by {item.artists.map((artist, i, arr) => <span key={artist.id + i}>{i === 0 ? '' : i < (arr.length - 1) ? ', ' : ' and '}<strong>{artist.name}</strong></span>)}</p>
-                    {albumTracks && <TracksScroll albumTracks={albumTracks} />}
-                </article>
+            <section className={`${style.section} ${themeStyle[theme]}`}>
+                <figure>
+                    <img title={item.name} src={item.images[1].url} width={item.images[1].width} height={item.images[1].height} alt={'album ' + item.name} />
+                    <figcaption>
+                        <div>
+                            <h5>{item.name}</h5>
+                            {albumTracks && <AddRemoveButton item={albumTracks.tracks.items} playlistTrack={false} />}
+                        </div>
+                        <p>{item.album_type}(<em>release date: {item.release_date}</em>) featuring {item.total_tracks} tracks by {item.artists.map((artist, i, arr) => <span key={artist.id + i}>{i === 0 ? '' : i < (arr.length - 1) ? ', ' : ' and '}<strong>{artist.name}</strong></span>)}</p>
+                        {albumTracks && <TracksScroll albumTracks={albumTracks} />}
+                    </figcaption>
+                </figure>
                 <Arrow img="circle_down" />
             </section>
             <div className={searchResults.list}>

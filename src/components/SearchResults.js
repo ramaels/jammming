@@ -7,10 +7,13 @@ import Album from "./Album";
 import Artist from "./Artist";
 import Playlist from "./Playlist";
 import Pagination from "./Pagination";
+import themeStyle from "../styles/theme.module.css";
+import ThemeContext from "../ThemeContext";
 
 function SearchResults() {
     const { searchResult } = useContext(CurrentUserContext);
-    return (<div className={style.tracks}>
+    const {theme} = useContext(ThemeContext);
+    return (<div className={`${style.tracks} ${themeStyle[theme]}`}>
         {searchResult.tracks && <div className={style.title}><h2>Track Search Results</h2><Arrow img="down" /></div>}
         {searchResult.tracks && <div className={style.list}>
             <div>
@@ -23,7 +26,7 @@ function SearchResults() {
         {searchResult.artists && <div className={style.title}><h2>Artist Search Results</h2><Arrow img="down" /></div>}
         {searchResult.artists && <div className={style.list}>
             <div>
-                <div>
+                <div className={style.artists}>
                     {searchResult.artists.items.map((item, i) => <Artist key={'searchresults_' + item.id} artist={item} />)}
                 </div>
                 <Pagination />

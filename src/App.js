@@ -4,14 +4,17 @@ import Spotify from "./utils/Spotify";
 import { useState, useCallback, useEffect } from 'react';
 
 import MyProviders from "./MyProviders";
+import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Playlists from "./components/Playlists";
 import CurrentSelection from "./components/CurrentSelection";
+import themeStyle from "./styles/theme.module.css";
 
 const auth = new Spotify(64, '04c4415a520843cd92e8673a3ff41593', 'http://localhost:3000/');
 
 function App() {
+  const [theme, setTheme] = useState('light');
   const [token, setToken] = useState({});
   const [userProfile, setUserProfile] = useState(null);
   const [genres, setGenres] = useState([]);
@@ -260,11 +263,11 @@ function App() {
       getSubResults={getSubResults}
       addPlaylistId={addPlaylistId}
       savePlaylist={savePlaylist}
+      theme={theme}
+      setTheme={setTheme}
     >
-      <div className={style.app}>
-        {token.access_token && (<header className="App-header">
-          <h1>JAMMING</h1>
-        </header>)}
+      <div className={`${style.app} ${themeStyle[theme]}`}>
+        {token.access_token && <Header />}
         <main className={style.main}>
           {!token.access_token && <button onClick={handleLogin}>Let's JamMming!</button>}
           {token.access_token && (<>

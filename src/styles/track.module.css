@@ -1,25 +1,59 @@
 .track {
     display: flex;
-    margin: 1rem;
+    margin: 0 1rem;
+    background-color: var(--background-color);
+    color: var(--color);
+    padding: .5rem;
+    position: relative;
+    border-radius: 10px;
+}
+
+.track:not(:last-of-type) {
+    margin-bottom: .5rem;
+}
+
+.track:not(:first-of-type) {
+    margin-top: .5rem;
 }
 
 .track * {
     margin: 0;
 }
 
-.track > img {
-    width: 4rem;
-    height: 4rem;
+.track>figure {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
 }
 
-.track > section {
+.track>section:last-of-type {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.track img {
+    width: 4rem;
+    height: 4rem;
 }
 
 .track figcaption {
     flex-grow: 1;
     font-size: .8rem;
     padding: 0 1rem;
+}
+
+.track figcaption>h3 {
+    display: inline-block;
+}
+
+@media only screen and (max-width: 700px) {
+    .track>figure {
+        flex-direction: column;
+    }
+
+    .track>section:last-of-type {
+        position: absolute;
+        right: .5rem;
+    }
 }

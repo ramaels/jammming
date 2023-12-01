@@ -1,7 +1,7 @@
 import { useState, useCallback, useContext } from "react";
 import CurrentUserContext from "../UserContext";
 import style from "../styles/selectionForm.module.css";
-import closeBtn from "../styles/addRemoveButton.module.css";
+import buttonStyles from "../styles/button.module.css";
 
 function SelectionForm({ setShowForm }) {
     const { setPlaylistName, setPlaylistDescription, playlistName, playlistDescription } = useContext(CurrentUserContext);
@@ -24,7 +24,7 @@ function SelectionForm({ setShowForm }) {
     }, [name, description, setPlaylistName, setPlaylistDescription, setShowForm]);
 
     return (<div className={style.container}>
-        <div className={`${closeBtn.btn} ${closeBtn.close} ${style.close}`} onClick={() => { setShowForm(false); document.body.style.overflow = ''; }} role="button"></div>
+        <div className={`${buttonStyles.btn} ${buttonStyles.close} ${style.close}`} onClick={() => { setShowForm(false); document.body.style.overflow = ''; }} role="button"></div>
         <div className={style.form}>
             {showWarning && <div className={style.warning}><div className={style.icon}></div>Newlines will be converted to spaces.</div>}
             <input onChange={(e) => { setName(e.target.value) }} placeholder="New Playlist Name" type="text" value={name} />
@@ -33,7 +33,7 @@ function SelectionForm({ setShowForm }) {
                 setDescription(e.target.value);
                 matches ? setShowWarning(true) : setShowWarning(false);
             }} type="text" value={description} />
-            <button onClick={handleSave}>save</button>
+            <button className={buttonStyles.button} onClick={handleSave}>save</button>
         </div>
     </div>);
 }

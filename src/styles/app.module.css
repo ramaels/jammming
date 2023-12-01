@@ -1,22 +1,31 @@
-.app{
+.app {
     text-align: center;
+    background-color: var(--background-color-app);
+    color: var(--color);
 }
 
-.app > header {
-    background-color: #282c34;
-    min-height: 6rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 99;
+.app footer {
+    padding: 1rem;
+}
+
+.app footer * {
+    margin: 0;
 }
 
 .main {
-    margin-top: 8rem;
+    margin-top: 6rem;
+}
+
+.main>div{
+    margin: 0 2rem;
+}
+
+.main>div+div {
+    margin-top: 2rem;
+}
+
+@media only screen and (max-width: 700px) {
+    .main>div{
+        margin: 0 1rem;
+    }
 }

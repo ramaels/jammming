@@ -1,12 +1,16 @@
 import style from "../styles/searchBar.module.css";
+import buttonStyles from "../styles/button.module.css";
 import { useState, useCallback, useEffect, useContext, useRef } from "react";
 import CurrentUserContext from "../UserContext";
 import searchBtn from "../svg/search.svg";
 import filterBtn from "../svg/filter.svg";
+import themeStyle from "../styles/theme.module.css";
+import ThemeContext from "../ThemeContext";
 
 function SearchBar() {
     const filtersRef = useRef(null);
     const { token, search, genres } = useContext(CurrentUserContext);
+    const {theme} = useContext(ThemeContext);
     const [term, setTerm] = useState('');
     const [query, setQuery] = useState({
         album: '',
@@ -73,30 +77,30 @@ function SearchBar() {
     }, [filterHeight]);
 
     return (
-        <div>
-            <div className={style.search}>
-                <input type="text" value={term} onChange={handleChangeTerm} />
+        <div className={`${style.container} ${themeStyle[theme]}`}>
+            <div className={`${style.search}`}>
+                <input type="text" value={term} placeholder="search for terms" onChange={handleChangeTerm} />
                 <select value={selectedType} onChange={handleChangeType}>
                     {types.map(item => <option key={'type_' + item} value={item}>{capitalizeFirstChar(item)}</option>)}
                 </select>
                 <div className={style.buttons}>
-                    <button onClick={handleSearch}><img src={searchBtn} alt="search button" /></button>
-                    <button className={style['filters-btn']} onClick={handleShowFilters}><img src={filterBtn} alt="filter button" /></button>
+                    <button className={buttonStyles.button} onClick={handleSearch}><img src={searchBtn} alt="search button" /></button>
+                    <button className={buttonStyles.button} onClick={handleShowFilters}><img src={filterBtn} alt="filter button" /></button>
                 </div>
             </div>
             <div ref={filtersRef} className={style['filters-container']}>
                 <div className={style.filters}>
-                    {(selectedType === 'album' || selectedType === 'track') && <label htmlFor="filter-album">album:
+                    {(selectedType === 'album' || selectedType === 'track') && <label htmlFor="filter-album">album: 
                         <input id="filter-album" type="text" value={query.album} onChange={handleChangeFilter} /></label>}
-                    {(selectedType === 'album' || selectedType === 'artist' || selectedType === 'track') && <label htmlFor="filter-artist">artist:
+                    {(selectedType === 'album' || selectedType === 'artist' || selectedType === 'track') && <label htmlFor="filter-artist">artist: 
                         <input id="filter-artist" type="text" value={query.artist} onChange={handleChangeFilter} /></label>}
-                    {(selectedType === 'artist' || selectedType === 'track') && (<label htmlFor="filter-genre">genre:
+                    {(selectedType === 'artist' || selectedType === 'track') && (<label htmlFor="filter-genre">genre: 
                         <input list="genre" id="filter-genre" type="text" value={query.genre} onChange={handleChangeFilter} />
                         <datalist id="genre">
                             {genres.map(genre => <option key={'genre_' + genre} value={genre}></option>)}
                         </datalist>
                     </label>)}
-                    <label htmlFor="filter-track">track:
+                    <label htmlFor="filter-track">track: 
                         <input id="filter-track" type="text" value={query.track} onChange={handleChangeFilter} /></label>
                 </div>
             </div>

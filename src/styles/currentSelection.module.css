@@ -1,27 +1,32 @@
 .selection {
     padding: 0 2rem;
+    background-color: var(--background-color);
+    color: var(--color);
+    border: 3px var(--border-color) solid;
+    border-radius: 10px;
+}
+
+.selection .tracks {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.selection>div {
+    background-color: var(--background-color1);
+    color: var(--color);
+    border-radius: 10px;
+    margin: 1rem 0;
+    padding: 1rem 0;
 }
 
 .details {
     padding: 1rem 0;
+    background-color: var(--background-color1);
+    color: var(--color);
+    border-radius: 10px;
 }
 
 .details > div:first-of-type {
     float: right;
     margin-right: 1rem;
-}
-
-.edit {
-    -webkit-mask: url('../svg/edit.svg') no-repeat center / contain;
-    mask: url('../svg/edit.svg') no-repeat center / contain;
-    background-color: currentColor;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    display: inline-block;
-    transition: all .5s;
-}
-
-.edit:hover, .edit:active {
-    background-color: green;
 }

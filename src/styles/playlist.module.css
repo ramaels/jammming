@@ -1,40 +1,63 @@
 .playlist {
     display: flex;
+    background-color: var(--background-color);
+    color: var(--color);
+    margin-right: 1rem;
+    padding: .5rem;
+    position: relative;
+    border-radius: 10px;
+}
+
+.playlist:not(:last-of-type) {
+    margin-bottom: .5rem;
+}
+
+.playlist:not(:first-of-type) {
+    margin-top: .5rem;
 }
 
 .playlist * {
     margin: 0;
 }
 
-.playlist > img {
+.playlist>figure {
+    width: calc(100% - 24px);
+    display: flex;
+    align-items: center;
+}
+
+.playlist>figure>img {
     height: 3rem;
     width: 3rem;
     object-fit: cover;
 }
 
-.playlist > div:first-of-type {
-    flex-grow: 1;
-    width: calc(100% - 72px);
+.playlist>figure>figcaption {
+    width: calc(100% - 3rem);
 }
 
-.playlist > div > h5 {
+.playlist>figure>figcaption>h5 {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.edit {
-    -webkit-mask: url('../svg/edit.svg') no-repeat center / contain;
-    mask: url('../svg/edit.svg') no-repeat center / contain;
-    background-color: currentColor;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    display: inline-block;
-    transition: all .5s;
-    margin-left: 1rem !important;
+.playlist>figure>figcaption>h5>div {
+    margin-left: 1rem;
 }
 
-.edit:hover, .edit:active {
-    background-color: green;
+@media only screen and (max-width: 550px) {
+    .playlist>figure {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .playlist>figure>figcaption {
+        width: 100%;
+    }
+
+    .playlist>div:last-of-type {
+        position: absolute;
+        right: .5rem;
+    }
 }

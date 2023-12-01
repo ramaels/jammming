@@ -1,0 +1,17 @@
+.dark {
+    --background-color: rgb(40, 44, 52);
+    --background-color_opaque: rgba(40, 44, 52, 0.2);
+    --background-color1: rgb(21, 23, 27);
+    --color: rgb(255, 255, 255);
+    --border-color: rgb(112, 112, 112);
+    --background-color-app: black;
+}
+
+.light {
+    --background-color: #f1ce6d;
+    --background-color-opaque: rgba(255, 255, 255, 0.2);
+    --background-color1: #E9C050;
+    --color: #151B26;
+    --border-color: #555039;
+    --background-color-app: #ffffff;
+}

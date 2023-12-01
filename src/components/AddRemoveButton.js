@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import CurrentUserContext from "../UserContext";
 
-import style from "../styles/addRemoveButton.module.css";
+import style from "../styles/button.module.css";
 
 function AddRemoveButton({ item, playlistTrack }) {
     const [selected, setSelected] = useState(false);
