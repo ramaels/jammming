@@ -56,7 +56,7 @@ function SearchBar() {
         const height = filters.firstChild.offsetHeight;
         showFilters ? filters.style.setProperty('--height', `${height}px`) : filters.style.setProperty('--height', '0px');
 
-    }, [showFilters, selectedType])
+    }, [showFilters])
 
     function capitalizeFirstChar(inputString) {
         // Check if the input string is not empty
