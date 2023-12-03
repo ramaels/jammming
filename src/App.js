@@ -11,7 +11,7 @@ import Playlists from "./components/Playlists";
 import CurrentSelection from "./components/CurrentSelection";
 import themeStyle from "./styles/theme.module.css";
 
-const auth = new Spotify(64, '04c4415a520843cd92e8673a3ff41593', 'http://localhost:3000/');
+const auth = new Spotify(64, '04c4415a520843cd92e8673a3ff41593', 'https://prismatic-starship-410df8.netlify.app/');
 
 function App() {
   const [theme, setTheme] = useState('light');
